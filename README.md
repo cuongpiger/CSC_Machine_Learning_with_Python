@@ -4,3 +4,8 @@
 
 </div>
 
+<hr>
+
+## MỤC LỤC
+* Chapter 2. Supervised Learning - Regression - Linear Regression
+  * 
