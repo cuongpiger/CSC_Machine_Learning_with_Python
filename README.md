@@ -4,4 +4,3 @@
 
 </div>
 
-![](images/0.png)
