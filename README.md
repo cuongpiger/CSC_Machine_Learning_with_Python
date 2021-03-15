@@ -1,5 +1,1 @@
-<center>
-  
-  # CSC - Machine Learning with Python
-  
-</center>
+# CSC - Machine Learning with Python {align=center}
