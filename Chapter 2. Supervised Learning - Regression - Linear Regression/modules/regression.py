@@ -1,6 +1,7 @@
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error
+from scipy.stats.stats import pearsonr
 
 class MySimpleLinearRegression:
     def __init__(self, data):
@@ -88,3 +89,11 @@ class MyMultipleLinearRegression:
             return mean_squared_error(y_predict, self.test['y'])
         elif option == 'mae':
             return mean_absolute_error(y_predict, self.test['y'])
+        
+    def getPearsonPvalue(self):
+        pearson, pValue = pearsonr(self.predict(self.test['X']), self.test['y'])
+        
+        return {
+            'pearson': pearson,
+            'p-value': pValue
+        }
