@@ -1,5 +1,5 @@
 # 1. Quy trình làm việc liên quan đến machine learning
-* Data collecting $\rightarrow$ data preprocessing (2) $\rightarrow$ data analysis, build model $\rightarrow$ test, kiểm tra xem model nào là phù hợp _(có lặp lại khi model dự đoán ko chính xác)_
+* Data collecting ![formula](https://render.githubusercontent.com/render/math?math=\rightarrow) data preprocessing (2) $\rightarrow$ data analysis, build model $\rightarrow$ test, kiểm tra xem model nào là phù hợp _(có lặp lại khi model dự đoán ko chính xác)_
 * Có một mảng nghiên cứu riêng danh cho việc tạo ra dữ liệu
 * Supervised Learning: là các bài toán cần dự đoán một thứ gì đó mà có target.
   * Dc chia làm 2 bài toán chính là: 
