@@ -7,7 +7,7 @@
 <hr>
 
 ## MỤC LỤC
-* Chapter 2. Supervised Learning - Regression - Linear Regression
+* ##### Chapter 2. Supervised Learning - Regression - Linear Regression
   * Simple Linear Regression
   * Multiple Linear Regression
   * Polynomial Regression
