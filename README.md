@@ -16,7 +16,7 @@
     * Mean Squared Error _(MSE)_
     * Mean Absolute Error _(MAE)_
     * Root Mean Squared Error _(RMSE)_
-  * R-squared _(![formula](https://render.githubusercontent.com/render/math?math=R^2) , R^2)_ $`R^2`$
+  * R-squared _(![formula](https://render.githubusercontent.com/render/math?math=R^2) , R^2)_ ```math R^2```
   * Residual plot, Regression plot, Distribution plot
   * Intercept, Coef
   * Đọc/ghi file từ Google Drive
