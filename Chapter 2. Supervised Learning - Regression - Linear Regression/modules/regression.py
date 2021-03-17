@@ -3,6 +3,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from scipy.stats.stats import pearsonr
+import pandas as pd
 
 
 class MySimpleLinearRegression:
@@ -47,6 +48,23 @@ class MySimpleLinearRegression:
             return mean_squared_error(y_predict, self.test['y'])
         elif option == 'mae':
             return mean_absolute_error(y_predict, self.test['y'])
+        
+    def compareActualVsPredict(self):
+        return pd.DataFrame({
+            'Actual value': self.test['y'].values,
+            'Prediction': self.predict()
+        })
+        
+    def evaluate(self):
+        prediction = self.predict()
+        
+        return pd.DataFrame({
+            'R^2 all': [self.r2()],
+            'R^2 train': [self.r2('train')],
+            'R^2 test': [self.r2('test')],
+            'MSE': [self.leastSquares(prediction)],
+            'MAE': [self.leastSquares(prediction, 'mae')]
+        })
 
 
 class MyMultipleLinearRegression:

@@ -42,3 +42,20 @@ def heatmap(corr_mat):
     plt.figure(figsize=(15, 7))
     graph = sns.heatmap(corr_mat, cmap='RdYlGn', annot=True) # cờ `annot` dùng để hiển thị số trong từng cell của heatmap
     plt.show()
+    
+def visualTrainingTestPredictData(input_, reg_line,
+    X_train, y_train, X_test, y_test, X_predict, y_predict,
+    xlabel, ylabel
+):
+    plt.plot(input_, reg_line, color='gray', linewidth=2)
+    
+    plt.scatter(X_train, y_train, color='green', label='Training data')
+    plt.scatter(X_test, y_test, color='red', label='Test data')
+    plt.scatter(X_predict, y_predict, color='blue', label='Prediction data')
+    
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    
+    plt.legend()
+    plt.show()
+    
