@@ -116,8 +116,19 @@ class MyMultipleLinearRegression:
 
         return {
             'pearson': pearson,
-            'p-value': pValue
+            'p-value': pValue # pvalue dưới 5% là tốt
         }
+        
+    def evaluate(self):
+        prediction = self.predict()
+        
+        return pd.DataFrame({
+            'R^2 all': [self.r2()],
+            'R^2 train': [self.r2('train')],
+            'R^2 test': [self.r2('test')],
+            'MSE': [self.leastSquares(prediction)],
+            'MAE': [self.leastSquares(prediction, 'mae')]
+        })
 
 
 class MySimplePolynomialRegression:

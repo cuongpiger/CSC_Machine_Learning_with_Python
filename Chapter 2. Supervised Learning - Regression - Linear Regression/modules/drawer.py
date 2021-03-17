@@ -13,6 +13,10 @@ class MySeaborn:
         sns.residplot(self.data[x], self.data[y])
         plt.show()
         
+    def pairplot(self):
+        sns.pairplot(self.data)
+        plt.show()
+        
         
 def visualPredictVsActual(y_predict, y_actual, x_scale, y_scale):
     plt.figure(figsize=(7, 7))
