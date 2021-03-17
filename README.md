@@ -8,4 +8,17 @@
 
 ## MỤC LỤC
 * Chapter 2. Supervised Learning - Regression - Linear Regression
-  * 
+  * Simple Linear Regression
+  * Multiple Linear Regression
+  * Polynomial Regression
+  * Multivariate Polynomial
+  * Least Squares Method: 
+    * Mean Squared Error _(MSE)_
+    * Mean Absolute Error _(MAE)_
+    * Root Mean Squared Error _(RMSE)_
+  * R-squared _($R^2$ , R^2)_
+  * Residual plot, Regression plot, Distribution plot
+  * Intercept, Coef
+  * Đọc/ghi file từ Google Drive
+  * Tạo ra tập **training data** và **test data**
+  * `pandas-profiling`
