@@ -68,17 +68,24 @@ class MySimpleLinearRegression:
 
 
 class MyMultipleLinearRegression:
-    def __init__(self, data):
+    def __init__(self, data=None):
         self.data = data
 
     def createTrainTestData(self, X, y, train_size=0.75, random_state=100):
-        self.X = self.data[X]
-        self.y = self.data[y]
         self.train = {}
         self.test = {}
+        
+        if type(X) == list:
+            self.X = self.data[X]
+            self.y = self.data[y]
+        else:
+            self.X = X
+            self.y = y
+            self.data = pd.concat([X, y.reindex(y.index)], axis=1)
 
         self.train['X'], self.test['X'], self.train['y'], self.test['y'] = train_test_split(
-            self.X, self.y, random_state=random_state, train_size=train_size)
+                self.X, self.y, random_state=random_state, train_size=train_size)
+        
 
     def initModel(self):
         self.model = LinearRegression()
@@ -184,7 +191,7 @@ class MySimplePolynomialRegression:
 
 
 class MyMultivariatePolynomial:
-    def __init__(self, data):
+    def __init__(self, data=None):
         self.data = data
 
     def transform(self, X, degree=2):
@@ -196,13 +203,19 @@ class MyMultivariatePolynomial:
 
     def createTrainTestData(self, X, y, degree=2, train_size=0.75, random_state=100):
         self.degree = degree
-        self.X = self.transform(X, self.degree)
-        self.y = self.data[y]
         self.train = {}
         self.test = {}
+        
+        if type(X) == list:
+            self.X = self.data[X]
+            self.y = self.data[y]
+        else:
+            self.X = X
+            self.y = y
+            self.data = pd.concat([X, y.reindex(y.index)], axis=1)
 
         self.train['X'], self.test['X'], self.train['y'], self.test['y'] = train_test_split(
-            self.X, self.y, random_state=random_state, train_size=train_size)
+                self.X, self.y, random_state=random_state, train_size=train_size)
 
     def initModel(self):
         self.model = LinearRegression()
@@ -233,3 +246,14 @@ class MyMultivariatePolynomial:
             return mean_squared_error(y_predict, self.test['y'])
         elif option == 'mae':
             return mean_absolute_error(y_predict, self.test['y'])
+
+    def evaluate(self):
+        prediction = self.predict()
+        
+        return pd.DataFrame({
+            'R^2 all': [self.r2()],
+            'R^2 train': [self.r2('train')],
+            'R^2 test': [self.r2('test')],
+            'MSE': [self.leastSquares(prediction)],
+            'MAE': [self.leastSquares(prediction, 'mae')]
+        })
