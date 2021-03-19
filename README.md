@@ -21,4 +21,5 @@
   * Intercept, Coef
   * Đọc/ghi file từ Google Drive
   * Tạo ra tập **training data** và **test data**
+  * Quy trình build model
   * `pandas-profiling`
