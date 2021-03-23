@@ -69,9 +69,10 @@ class CLogisticRegression:
             plt.contourf(X1, X2, self.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape), alpha=.75, cmap=ListedColormap(('red', 'green')))
             plt.xlim(X1.min(), X1.max())
             plt.ylim(X2.min(), X2.max())
-            plt.scatter(self.test['X'][x], self.test['X'][y], c=self.test['y'], cmap=ListedColormap(('red', 'green')))
+            scatter = plt.scatter(self.test['X'][x], self.test['X'][y], c=self.test['y'], cmap=ListedColormap(('red', 'green')))
             plt.xlabel(x)
             plt.ylabel(y)
+            plt.legend(handles=scatter.legend_elements()[0], labels=['~' + self.test['y'].name, self.test['y'].name], loc='upper center', bbox_to_anchor=(1, -0.07), fancybox=True, shadow=True)
             plt.title('Actual Values of Test Data\ndisplay on Prediction Areas Plot', fontsize=20)
             
         plt.show()
