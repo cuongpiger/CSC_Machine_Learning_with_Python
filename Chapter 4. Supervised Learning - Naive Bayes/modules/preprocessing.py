@@ -8,6 +8,6 @@ class CPreprocessing:
     def eda(self):
         return pp.ProfileReport(self.data)
     
-    def encoding(self, option='one-hot', drop_first=False):
-        if option == 'one-hot':
+    def encoding(self, option='dummy', drop_first=False):
+        if option == 'dummy':
             return pd.get_dummies(self.data, drop_first=drop_first)
