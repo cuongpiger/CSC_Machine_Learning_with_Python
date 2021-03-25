@@ -1,5 +1,7 @@
 import pandas as pd
 import pickle
+import matplotlib.pyplot as plt
+import imageio
 
 
 class CPandasFile:
@@ -52,3 +54,11 @@ class CPickleFile:
         
         print('Success!')
         return content
+
+
+class CImage:
+    def readImage(self, path):
+        photo_data = imageio.imread(path)
+        plt.figure(figsize=(20, 20))
+        plt.imshow(photo_data)
+        

@@ -23,4 +23,27 @@ class CDecisionTree:
         dot_data = tree.export_graphviz(
             self.model, out_file=None, feature_names=self.X.columns)
         graph = pydotplus.graph_from_dot_data(dot_data)
+
         return Image(graph.create_png())
+
+    def exportFile(self, save_path):
+        dot_data = tree.export_graphviz(
+            self.model, out_file=None, feature_names=self.X.columns)
+        graph = pydotplus.graph_from_dot_data(dot_data)
+
+        if '.pdf' in save_path:
+            graph.write_pdf(save_path)
+        elif '.png' in save_path:
+            graph.write_png(save_path)
+
+        print('Done.')
+
+    def exportDotData(self, path):
+        try:
+            with open(path, 'w') as file:
+                file = tree.export_graphviz(
+                    self.model, out_file=file, feature_names=self.X.columns)
+                
+                print('Success!')
+        except:
+            print('Error!')
