@@ -1,4 +1,4 @@
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 from sklearn import tree
 from IPython.display import Image
 import pydotplus
@@ -9,8 +9,12 @@ class CDecisionTree:
         self.X = X
         self.y = y
 
-    def initModel(self):
-        self.model = DecisionTreeClassifier()
+    def initModel(self, option='classification'):
+        if option == 'classification':
+            self.model = DecisionTreeClassifier()
+        elif option == 'regression':
+            self.model = DecisionTreeRegressor()
+            
         self.model.fit(self.X, self.y)
 
     def predict(self, X=None):
