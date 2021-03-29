@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd
 import pandas_profiling as pp
+import matplotlib.pyplot as plt
+from imblearn.over_sampling import SMOTE
+from sklearn.feature_selection import SelectKBest, chi2, f_regression
+from sklearn.model_selection import train_test_split
 
 class CPreprocessing:
     def unique(self, data):
@@ -43,4 +47,37 @@ class CPreprocessing:
     
     def eda(self, data):
         return pp.ProfileReport(data)
+    
+    def removeOutliers(self, data):
+        df = data.copy()
         
+        for feature in df.columns:
+            data_mean, data_std = np.mean(df[feature]), np.std(df[feature])
+            # define outliers
+            cut_off = data_std * 3
+            lower, upper = data_mean - cut_off, data_mean + cut_off
+            # identify outliers
+            df = df[(df[feature] >= lower) & (df[feature] <= upper)]
+            
+        return df
+    
+    def selectCategoricalFeature(self, X, y):
+        X_train, _, y_train, _ = train_test_split(X, y)
+        fs = SelectKBest(score_func=chi2, k='all')
+        fs.fit(X_train, y_train)
+        for i, feature in enumerate(X.columns):
+            print('Feature %s: %f' % (feature, fs.scores_[i]))
+        # plot the scores
+        plt.bar(X.columns, fs.scores_)
+        plt.show()
+        
+    def selectNumericalFeature(self, X, y):
+        X_train, _, y_train, _ = train_test_split(X, y)
+        fs = SelectKBest(score_func=f_regression, k='all')
+        fs.fit(X_train, y_train)
+        for i, feature in enumerate(X.columns):
+            print('Feature %s: %f' % (feature, fs.scores_[i]))
+        # plot the scores
+        plt.bar(X.columns, fs.scores_)
+        plt.show()    
+    

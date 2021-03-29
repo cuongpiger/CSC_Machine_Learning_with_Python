@@ -22,6 +22,15 @@ class CPandasFile:
             usecols = [usecols]
 
         return pd.read_csv(path, usecols=usecols)
+    
+    def writeCsv(self, df, path):
+        try:
+            df.to_csv(path)
+        except:
+            print('Error!')
+            return
+        
+        print('Success!')
 
     def readExcel(self, path):
         return pd.read_excel(path)
