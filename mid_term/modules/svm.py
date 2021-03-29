@@ -27,9 +27,11 @@ class CSupportVectorMachine:
             
         return self.model.predict(X)
     
-    def r2(self, X=None):
+    def r2(self):
         return {
-            'all': r2_score(self.y, self.predict(self.X))
+            'all': r2_score(self.y, self.predict(self.X)),
+            'train': r2_score(self.train['y'], self.predict(self.train['X'])),
+            'test': r2_score(self.test['y'], self.predict(self.test['X']))
         }
     
 
