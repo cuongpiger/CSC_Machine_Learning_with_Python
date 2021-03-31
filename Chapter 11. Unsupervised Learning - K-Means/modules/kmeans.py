@@ -48,7 +48,7 @@ class CKMeans:
             
         if visual:
             drawer.line(pd.Series(np.arange(1, k_upper + 1), name='K-values'), 
-                        pd.Series(lst_wsse, name="WSSE values"), "The Elbow Method\nshowing the optimal k-values")
+                        pd.Series(lst_wsse, name="WSSE values"), "The Elbow Method\nshowing the optimal k-values ❤️")
             
         return pd.DataFrame([(k + 1, v) for k, v in enumerate(lst_wsse)], columns=['k-value', 'wsse-value']).set_index(['k-value'])
         

@@ -9,7 +9,7 @@ class CDrawer:
         plt.scatter(a, b)
         plt.xlabel(a.name)
         plt.ylabel(b.name)
-        plt.title(title, fontsize=20)
+        plt.title(title, fontsize=18, color='r')
         
         plt.show()
         
