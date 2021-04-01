@@ -6,7 +6,7 @@ from sklearn import metrics
 from scipy.spatial.distance import cdist
 from modules.drawer import CDrawer
 
-from typing import List
+from typing import List, Optional
 
 drawer = CDrawer()
 
@@ -18,6 +18,7 @@ class CKMeans:
             X (pd.DataFrame): training dataset.
         """
         self.X: pd.DataFrame = X
+        self.model = None
         
     def initModel(self, k_value: int = 2):
         """ Model building method for K-Means
@@ -27,7 +28,14 @@ class CKMeans:
         """
         self.model = KMeans(n_clusters=k_value)
         self.model.fit(self.X)
-    
+        
+    def predict(self, data: pd.DataFrame or np.ndarray) -> Optional[np.ndarray]:
+        if self.model is not None:
+            return self.model.predict(data)
+        else:
+            print('The model has not been trained!')
+            return None
+        
     def recommendKValue(self, k_upper: int = 10, visual: bool = False):
         """ Method used to visualize and suggest the best k-value based on Elbow Method
         
@@ -48,7 +56,34 @@ class CKMeans:
             
         if visual:
             drawer.line(pd.Series(np.arange(1, k_upper + 1), name='K-values'), 
-                        pd.Series(lst_wsse, name="WSSE values"), "The Elbow Method\nshowing the optimal k-values ❤️")
+                        pd.Series(lst_wsse, name="WSSE values"), "The Elbow Method\nshowing the optimal k-values ❤️\n")
             
         return pd.DataFrame([(k + 1, v) for k, v in enumerate(lst_wsse)], columns=['k-value', 'wsse-value']).set_index(['k-value'])
         
+    def showClusterCenter(self):
+        """ List the list of k cluster center points
+        
+        Returns:
+            ndarray[(float, float)]: list of cluster center points  
+        """
+        if self.model is not None:
+            return np.array([(p[0], p[1]) for p in self.model.cluster_centers_])
+        
+    def showSampleLabels(self):
+        """ Indicates which cluster the samples belong
+        
+        Returns:
+            pd.DataFrame: a pd.DataFrame includes the original self.X dataset and a `label`
+                column indicating which cluster the sample belongs.
+        """
+        res: pd.DataFrame = self.X.copy()
+        res['label'] = self.model.labels_
+        
+        return res
+    
+    def visualModelTraining(self):
+        if self.model is not None:
+            if self.X.shape[1] == 2:
+                cluster_points = self.showClusterCenter()
+                groups = pd.Series(self.model.labels_)
+                drawer.clusterScatter(self.X.iloc[:, 0], self.X.iloc[:, 1], groups, cluster_points, title="K-Means with 2 features dataset ❤️\n")
