@@ -22,14 +22,14 @@ class CPandasFile:
             usecols = [usecols]
 
         return pd.read_csv(path, usecols=usecols)
-
+    
     def writeCsv(self, df, path):
         try:
             df.to_csv(path)
         except:
             print('Error!')
             return
-
+        
         print('Success!')
 
     def readExcel(self, path):
@@ -38,29 +38,29 @@ class CPandasFile:
 
 class CPickleFile:
     def write(self, path, model, option='overwrite'):
-        if option == 'overwrite':  # ghi đè
+        if option == 'overwrite': # ghi đè
             option = 'wb'
 
         try:
-            with open(path, option) as file:
+            with open(path, option) as file:  
                 pickle.dump(model, file)
 
             print('Success!')
         except:
             print('Error!')
-
+            
     def read(self, path):
         content = None
-
+        
         try:
             with open(path, 'rb') as file:
                 content = pickle.load(file)
-
+                
         except:
             print('Error!')
-
+            
             return None
-
+        
         print('Success!')
         return content
 
@@ -70,3 +70,4 @@ class CImage:
         photo_data = imageio.imread(path)
         plt.figure(figsize=(20, 20))
         plt.imshow(photo_data)
+        
