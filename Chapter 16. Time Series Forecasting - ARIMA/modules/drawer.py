@@ -34,7 +34,8 @@ class CDrawer:
         
         plt.show()
         
-    def line(self, a: pd.Series, b: pd.Series, title=""):
+    def line(self, a: pd.Series, b: pd.Series, title="", figsize: tuple = None):
+        plt.figure(figsize=figsize)
         plt.plot(a, b, 'co-')
         plt.xlabel(a.name, color='b', weight='bold')
         plt.ylabel(b.name, color='b', weight='bold')

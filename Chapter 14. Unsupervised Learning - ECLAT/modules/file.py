@@ -8,7 +8,7 @@ class CPandasFile:
     """ Class dùng để đọc ghi file bằng package pandas
     """
 
-    def readCsv(self, path, usecols=None):
+    def readCsv(self, path, usecols=None, index_col=None):
         """ Đọc file csv
 
         Args:
@@ -21,7 +21,7 @@ class CPandasFile:
         if type(usecols) == str:
             usecols = [usecols]
 
-        return pd.read_csv(path, usecols=usecols)
+        return pd.read_csv(path, usecols=usecols, index_col=index_col)
 
     def writeCsv(self, df, path):
         try:
