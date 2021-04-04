@@ -4,15 +4,16 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score
 from modules.drawer import CDrawer
+from modules.preprocessing import CPreprocessing
 
 from typing import List
 
 drawer = CDrawer()
-vectorizer = TfidfVectorizer(stop_words='english')
-
+cleaner = CPreprocessing()
 class CKMeansText:
     def __init__(self, documents: List[str]):
-        self.X = vectorizer.fit_transform(documents)
+        self.vectorizer = TfidfVectorizer(stop_words='english')
+        self.X = self.vectorizer.fit_transform(documents)
         self.model = None
         
     def recommendKValue(self, k_upper: int = 10):
@@ -52,3 +53,12 @@ class CKMeansText:
                 column indicating which cluster the sample belongs.
         """
         return self.model.labels_
+
+    def predict(self, documents: List[str]):
+        y = self.vectorizer.transform([cleaner.textPreprocessing(document) for document in documents])
+        y_hat = self.model.predict(y)
+
+        return pd.DataFrame({
+            'content': documents,
+            'class': y_hat
+        })

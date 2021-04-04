@@ -6,7 +6,7 @@ import scipy.cluster.hierarchy as sch
 
 from wordcloud import WordCloud
 
-from typing import Optional
+from typing import Optional, Tuple
 class CDrawer:
     def scatter(self, a: pd.Series, b: pd.Series, title=""):
         plt.scatter(a, b)
@@ -51,5 +51,10 @@ class CDrawer:
         
         plt.show()
         
-    def wordCloud(self, text: str):
-        wc = WordCloud(max_font_size=50, max_words=100, background_color='white').generate(text)
+    def wordCloud(self, text: str, figsize: Tuple[int, int]):
+        wc = WordCloud(max_font_size=50, max_words=200, background_color='white').generate(text)
+        plt.figure(figsize=figsize)
+        plt.imshow(wc, interpolation="bilinear")
+        plt.axis('off')
+
+        plt.show()
