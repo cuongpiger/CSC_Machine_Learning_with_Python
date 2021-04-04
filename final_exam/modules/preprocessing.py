@@ -3,6 +3,7 @@ import pandas as pd
 import re
 import nltk
 import matplotlib.pyplot as plt
+import pandas_profiling as pp
 from sklearn.feature_selection import SelectKBest, chi2, f_regression
 from sklearn.model_selection import train_test_split
 from nltk.corpus import stopwords
@@ -55,8 +56,8 @@ class CPreprocessing:
 
         return pd.DataFrame(tmp, columns=['Feature', 'Number of outliers', 'Number of non-outiers'])
 
-    # def eda(self, data):
-    #     return pp.ProfileReport(data)
+    def eda(self, data: pd.DataFrame):
+        return pp.ProfileReport(data)
 
     def removeOutliers(self, data):
         df = data.copy()
