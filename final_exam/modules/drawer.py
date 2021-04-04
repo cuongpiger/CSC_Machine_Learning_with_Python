@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import scipy.cluster.hierarchy as sch
 
+from wordcloud import WordCloud
+
 from typing import Optional
 class CDrawer:
     def scatter(self, a: pd.Series, b: pd.Series, title=""):
@@ -49,3 +51,5 @@ class CDrawer:
         
         plt.show()
         
+    def wordCloud(self, text: str):
+        wc = WordCloud(max_font_size=50, max_words=100, background_color='white').generate(text)
